@@ -14,12 +14,14 @@
     "format": "prettier --write \"{app,pages,components,layouts,plugins,assets,composables}/**/*.{js,ts,vue,css,json,md}\""
   },
   "dependencies": {
+    "@nuxt/ui": "^4.5.1",
     "@pinia/nuxt": "^0.11.3",
     "lodash-es": "^4.17.22",
     "nuxt": "^4.2.2",
     "pinia": "^3.0.4",
     "vee-validate": "^4.15.1",
-    "vue": "^3.5.25"
+    "vue": "^3.5.25",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
