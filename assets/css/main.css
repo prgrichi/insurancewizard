@@ -4,36 +4,42 @@
 @import './ui.css';
 
 /* === Dark Mode Variables === */
-@layer base {
-  :root {
-    /* Light Mode */
-    --color-background: #ffffff;
-    /* white */
-    --color-foreground: #0f172a;
-    /* neutral-900 */
-    --color-muted: #f8fafc;
-    /* neutral-100 */
-    --color-muted-foreground: #4b5563;
-    /* neutral-600 */
-    --color-border: #e5e7eb;
-    /* neutral-200 */
-    --color-ring: #e5e7eb;
-    /* neutral-200 */
-  }
+:root {
+  /* Background */
+  --color-bg-page: #f8fafc; /* slate-50 */
+  --color-bg-surface: #ffffff;
 
-  .dark {
-    /* Dark Mode */
-    --color-background: #0f172a;
-    /* neutral-900 */
-    --color-foreground: #f8fafc;
-    /* neutral-100 */
-    --color-muted: #1f2937;
-    /* neutral-700 */
-    --color-muted-foreground: #9ca3af;
-    /* neutral-400 */
-    --color-border: #4b5563;
-    /* neutral-600 */
-    --color-ring: #4b5563;
-    /* neutral-600 */
-  }
+  /* Text */
+  --color-text-primary: #0f172a; /* slate-900 */
+  --color-text-secondary: #475569; /* slate-600 */
+
+  /* Border */
+  --color-border: #e2e8f0; /* slate-200 */
+
+  /* Brand */
+  --color-primary: #2563eb; /* blue-600 */
+  --color-primary-hover: #1d4ed8; /* blue-700 */
+
+  /* Status */
+  --color-success: #16a34a; /* green-600 */
+  --color-warning: #f59e0b; /* amber-500 */
+  --color-danger: #dc2626; /* red-600 */
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+.dark {
+  /* Dark Mode */
+  /* --color-background: #0f172a; */
+  /* neutral-900 */
+  /* --color-foreground: #f8fafc; */
 }

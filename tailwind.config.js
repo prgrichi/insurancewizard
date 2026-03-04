@@ -4,46 +4,42 @@ export default {
   theme: {
     extend: {
       colors: {
-        // === Einheitliche Grau-Palette ===
-        neutral: {
-          900: '#0F172A',
-          800: '#1E293B',
-          700: '#1F2937',
-          600: '#4B5563',
-          500: '#6B7280',
-          400: '#9CA3AF',
-          300: '#D1D5DB',
-          200: '#E5E7EB',
-          100: '#F8FAFC',
-          50: '#F9FAFB',
-        },
+        /* Background */
+        page: 'var(--color-bg-page)',
+        surface: 'var(--color-bg-surface)',
 
-        // === Primary (Rot) ===
-        primary: {
-          900: '#7F1D1D',
-          700: '#B91C1C',
-          600: '#DC2626',
-          500: '#EF4444',
-          400: '#F87171',
-          100: '#FEE2E2',
-        },
+        /* Text */
+        primary: 'var(--color-text-primary)',
+        secondary: 'var(--color-text-secondary)',
 
-        // === Accent (Gelb/Orange) ===
-        accent: {
-          600: '#F59E0B',
-          500: '#FBBF24',
-        },
-
-        // === Surface ===
-        surface: '#ffffff',
-
-        // === Dark Mode Aliases ===
-        background: 'var(--color-background)',
-        foreground: 'var(--color-foreground)',
-        muted: 'var(--color-muted)',
-        'muted-foreground': 'var(--color-muted-foreground)',
+        /* Border */
         border: 'var(--color-border)',
-        ring: 'var(--color-ring)',
+
+        /* Brand */
+        brand: {
+          DEFAULT: 'var(--color-primary)',
+          hover: 'var(--color-primary-hover)',
+        },
+
+        /* Status */
+        // success: 'var(--color-success)',
+        // warning: 'var(--color-warning)',
+        // danger: 'var(--color-danger)',
+      },
+
+      spacing: {
+        xs: 'var(--space-xs)',
+        sm: 'var(--space-sm)',
+        md: 'var(--space-md)',
+        lg: 'var(--space-lg)',
+        xl: 'var(--space-xl)',
+        '2xl': 'var(--space-2xl)',
+      },
+
+      borderRadius: {
+        sm: 'var(--radius-sm)',
+        md: 'var(--radius-md)',
+        lg: 'var(--radius-lg)',
       },
 
       maxWidth: {
