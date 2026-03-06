@@ -4,7 +4,7 @@
 
     <p class="text-text-main">Ihre Daten werden nur für die Berechnung verwendet.</p>
 
-    <form @submit.prevent="onSubmit" class="space-y-6">
+    <form @submit.prevent="onSubmit" novalidate class="space-y-6">
       <UFormField label="Vorname" :error="errors.firstName">
         <UInput v-model="firstName" class="w-full" />
       </UFormField>
@@ -14,7 +14,7 @@
       </UFormField>
 
       <UFormField label="Email" :error="errors.email">
-        <UInput v-model="email" class="w-full" type="email" />
+        <UInput v-model="email" v-bind="emailAttrs" class="w-full" type="email" />
       </UFormField>
 
       <div class="flex justify-between">
@@ -73,7 +73,7 @@ const { handleSubmit, defineField, errors } = useForm({
 
 const [firstName] = defineField('firstName');
 const [lastName] = defineField('lastName');
-const [email] = defineField('email', {
+const [email, emailAttrs] = defineField('email', {
   validateOnModelUpdate: false,
 });
 

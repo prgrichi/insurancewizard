@@ -22,18 +22,27 @@
     </div>
 
     <div class="text-xl font-bold">Beitrag: {{ insurance.premium }} €</div>
-  </div>
 
-  <div class="flex justify-between mt-lg">
-    <UButton
-      size="lg"
-      color="primary"
-      variant="ghost"
-      @click="prevStep"
-      class="flex justify-center"
-    >
-      Zurück
-    </UButton>
+    <div class="flex justify-between">
+      <UButton
+        size="lg"
+        color="primary"
+        variant="ghost"
+        @click="prevStep"
+        class="flex justify-center"
+      >
+        Zurück
+      </UButton>
+      <UButton
+        size="lg"
+        type="submit"
+        @click="nextStep"
+        color="primary"
+        class="flex justify-center"
+      >
+        Antrag abschicken
+      </UButton>
+    </div>
   </div>
 </template>
 
@@ -45,5 +54,8 @@ const insurance = useInsuranceStore();
 
 const prevStep = () => {
   navigateTo('/insurance/personal');
+};
+const nextStep = () => {
+  navigateTo('/insurance/success');
 };
 </script>

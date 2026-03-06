@@ -14,7 +14,7 @@
         v-model="insurance.bike.modelId"
         :items="modelItems"
         placeholder="Modell auswählen"
-        :disabled="!insurance.bike.manufacturerId"
+        :disabled="!insurance.bike.manufacturerId || modelItems.length === 0"
         class="w-full"
       />
     </UFormField>
@@ -36,18 +36,34 @@
 </template>
 
 <script setup>
-import { manufacturers, models } from '~/data/bikes';
 import { useInsuranceStore } from '../../stores/insurance';
+import { useLookupStore } from '~/stores/lookup.store';
 
+const lookUp = useLookupStore();
 const insurance = useInsuranceStore();
 
-const manufacturerItems = manufacturers.map(m => ({
-  label: m.name,
-  value: m.id,
-}));
+onMounted(() => {
+  lookUp.fetchManufacturers();
+});
+
+const manufacturerItems = computed(() =>
+  lookUp.manufacturers.map(m => ({
+    label: m.name,
+    value: m.id,
+  }))
+);
+
+watch(
+  () => insurance.bike.manufacturerId,
+  id => {
+    if (!id) return;
+    lookUp.fetchModels(id);
+    console.log(lookUp.models);
+  }
+);
 
 const modelItems = computed(() =>
-  models
+  lookUp.models
     .filter(m => m.manufacturerId === insurance.bike.manufacturerId)
     .map(m => ({
       label: m.name,
