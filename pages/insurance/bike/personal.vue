@@ -49,9 +49,9 @@ definePageMeta({
 import { z } from 'zod';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
-import { useInsuranceStore } from '../../stores/insurance';
+import { useBikeInsuranceStore } from '../../../stores/bikeInsurance.store';
 
-const insurance = useInsuranceStore();
+const bikeInsurance = useBikeInsuranceStore();
 
 const schema = z.object({
   firstName: z.string().min(1, 'Vorname ist erforderlich'),
@@ -62,9 +62,9 @@ const schema = z.object({
 const { handleSubmit, defineField, errors } = useForm({
   validationSchema: toTypedSchema(schema),
   initialValues: {
-    firstName: insurance.personal.firstName,
-    lastName: insurance.personal.lastName,
-    email: insurance.personal.email,
+    firstName: bikeInsurance.personal.firstName,
+    lastName: bikeInsurance.personal.lastName,
+    email: bikeInsurance.personal.email,
   },
   validateOnBlur: true,
   validateOnInput: false,
@@ -78,7 +78,7 @@ const [email, emailAttrs] = defineField('email', {
 });
 
 const prevStep = () => {
-  navigateTo('/insurance/coverage');
+  navigateTo('/insurance/bike/coverage');
 };
 
 const isStepValid = computed(() => {
@@ -87,8 +87,8 @@ const isStepValid = computed(() => {
 
 const onSubmit = handleSubmit(values => {
   console.log(values);
-  insurance.personal = values;
+  bikeInsurance.personal = values;
 
-  navigateTo('/insurance/summary');
+  navigateTo('/insurance/bike/summary');
 });
 </script>

@@ -1,4 +1,4 @@
-import models from '../data/models.json';
+import models from '../data/bike/models.json';
 
 export default defineEventHandler(event => {
   const { manufacturerId } = getQuery(event);

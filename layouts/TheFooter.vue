@@ -3,7 +3,7 @@
     <div
       class="container mx-auto px-md py-lg flex flex-col md:flex-row justify-between items-center text-sm text-text-main"
     >
-      <div>© 2026 BikeProtect</div>
+      <div>© 2026 Insurance Wizard</div>
 
       <nav class="flex gap-lg mt-sm md:mt-0">
         <a href="#" class="text-text-main">Impressum</a>

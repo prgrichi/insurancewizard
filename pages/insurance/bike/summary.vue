@@ -4,24 +4,24 @@
 
     <div>
       <h2 class="font-semibold">Fahrrad</h2>
-      <p>Preis: {{ insurance.bike.price }} €</p>
-      <p>Hersteller ID: {{ insurance.bike.manufacturerId }}</p>
-      <p>Model ID: {{ insurance.bike.modelId }}</p>
+      <p>Preis: {{ bikeInsurance.bike.price }} €</p>
+      <p>Hersteller ID: {{ bikeInsurance.bike.manufacturerId }}</p>
+      <p>Model ID: {{ bikeInsurance.bike.modelId }}</p>
     </div>
 
     <div>
       <h2 class="font-semibold">Versicherung</h2>
-      <p>Diebstahl: {{ insurance.coverage.theft ? 'Ja' : 'Nein' }}</p>
-      <p>Vandalismus: {{ insurance.coverage.vandalism ? 'Ja' : 'Nein' }}</p>
+      <p>Diebstahl: {{ bikeInsurance.coverage.theft ? 'Ja' : 'Nein' }}</p>
+      <p>Vandalismus: {{ bikeInsurance.coverage.vandalism ? 'Ja' : 'Nein' }}</p>
     </div>
 
     <div>
       <h2 class="font-semibold">Persönliche Daten</h2>
-      <p>{{ insurance.personal.firstName }} {{ insurance.personal.lastName }}</p>
-      <p>{{ insurance.personal.email }}</p>
+      <p>{{ bikeInsurance.personal.firstName }} {{ bikeInsurance.personal.lastName }}</p>
+      <p>{{ bikeInsurance.personal.email }}</p>
     </div>
 
-    <div class="text-xl font-bold">Beitrag: {{ insurance.premium }} €</div>
+    <div class="text-xl font-bold">Beitrag: {{ bikeInsurance.premium }} €</div>
 
     <div class="flex justify-between">
       <UButton
@@ -50,12 +50,15 @@
 definePageMeta({
   middleware: 'insurance-wizard',
 });
-const insurance = useInsuranceStore();
+
+import { useBikeInsuranceStore } from '../../../stores/bikeInsurance.store';
+
+const bikeInsurance = useBikeInsuranceStore();
 
 const prevStep = () => {
-  navigateTo('/insurance/personal');
+  navigateTo('/insurance/bike/personal');
 };
 const nextStep = () => {
-  navigateTo('/insurance/success');
+  navigateTo('/insurance/bike/success');
 };
 </script>

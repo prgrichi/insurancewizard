@@ -6,12 +6,12 @@ export const useLookupStore = defineStore('lookup', () => {
   const manufacturers = ref([]);
   const models = ref([]);
 
-  async function fetchManufacturers() {
-    manufacturers.value = await getManufacturers();
+  async function fetchManufacturers(type) {
+    manufacturers.value = await getManufacturers(type);
   }
 
-  async function fetchModels(id) {
-    models.value = await getModels(id);
+  async function fetchModels(type, id) {
+    models.value = await getModels(type, id);
   }
 
   return {

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export const useInsuranceStore = defineStore('insurance', () => {
+export const useBikeInsuranceStore = defineStore('bikeInsurance', () => {
   // Step 1
   const bike = reactive({
     manufacturerId: null,

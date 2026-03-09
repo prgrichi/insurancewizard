@@ -1,9 +1,9 @@
-export function getManufacturers() {
-  return $fetch('/api/bike-manufacturers');
+export function getManufacturers(type) {
+  return $fetch(`/api/${type}-manufacturers`);
 }
 
-export function getModels(manufacturerId) {
-  return $fetch('/api/bike-models', {
+export function getModels(type, manufacturerId) {
+  return $fetch(`/api/${type}-models`, {
     query: { manufacturerId },
   });
 }

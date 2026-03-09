@@ -2,7 +2,7 @@
   <div class="space-y-6 max-w-app">
     <UFormField label="Hersteller" class="w-full">
       <USelect
-        v-model="insurance.bike.manufacturerId"
+        v-model="bikeInsurance.bike.manufacturerId"
         :items="manufacturerItems"
         placeholder="Hersteller auswählen"
         class="w-full"
@@ -11,16 +11,21 @@
 
     <UFormField label="Modell" class="w-full">
       <USelect
-        v-model="insurance.bike.modelId"
+        v-model="bikeInsurance.bike.modelId"
         :items="modelItems"
         placeholder="Modell auswählen"
-        :disabled="!insurance.bike.manufacturerId || modelItems.length === 0"
+        :disabled="!bikeInsurance.bike.manufacturerId || modelItems.length === 0"
         class="w-full"
       />
     </UFormField>
 
     <UFormField label="Kaufpreis (€)" class="w-full">
-      <UInput type="number" v-model="insurance.bike.price" placeholder="z.B. 1800" class="w-full" />
+      <UInput
+        type="number"
+        v-model="bikeInsurance.bike.price"
+        placeholder="z.B. 1800"
+        class="w-full"
+      />
     </UFormField>
 
     <UButton
@@ -36,14 +41,14 @@
 </template>
 
 <script setup>
-import { useInsuranceStore } from '../../stores/insurance';
+import { useBikeInsuranceStore } from '../../../stores/bikeInsurance.store';
 import { useLookupStore } from '~/stores/lookup.store';
 
 const lookUp = useLookupStore();
-const insurance = useInsuranceStore();
+const bikeInsurance = useBikeInsuranceStore();
 
 onMounted(() => {
-  lookUp.fetchManufacturers();
+  lookUp.fetchManufacturers('bike');
 });
 
 const manufacturerItems = computed(() =>
@@ -54,17 +59,17 @@ const manufacturerItems = computed(() =>
 );
 
 watch(
-  () => insurance.bike.manufacturerId,
+  () => bikeInsurance.bike.manufacturerId,
   id => {
     if (!id) return;
-    lookUp.fetchModels(id);
+    lookUp.fetchModels('bike', id);
     console.log(lookUp.models);
   }
 );
 
 const modelItems = computed(() =>
   lookUp.models
-    .filter(m => m.manufacturerId === insurance.bike.manufacturerId)
+    .filter(m => m.manufacturerId === bikeInsurance.bike.manufacturerId)
     .map(m => ({
       label: m.name,
       value: m.id,
@@ -72,18 +77,20 @@ const modelItems = computed(() =>
 );
 
 watch(
-  () => insurance.bike.manufacturerId,
+  () => bikeInsurance.bike.manufacturerId,
   () => {
-    insurance.bike.modelId = null;
+    bikeInsurance.bike.modelId = null;
   }
 );
 
 const isStepValid = computed(() => {
-  return insurance.bike.manufacturerId && insurance.bike.modelId && insurance.bike.price > 0;
+  return (
+    bikeInsurance.bike.manufacturerId && bikeInsurance.bike.modelId && bikeInsurance.bike.price > 0
+  );
 });
 
 const nextStep = () => {
-  console.log(insurance.bike);
-  navigateTo('/insurance/coverage');
+  console.log(bikeInsurance.bike);
+  navigateTo('/insurance/bike/coverage');
 };
 </script>

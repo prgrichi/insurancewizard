@@ -5,11 +5,11 @@
     <p class="text-text-main">Wähle zusätzliche Optionen nach Bedarf.</p>
 
     <UFormField>
-      <UCheckbox v-model="insurance.coverage.theft" label="Diebstahlschutz (+5€)" />
+      <UCheckbox v-model="bikeInsurance.coverage.theft" label="Diebstahlschutz (+5€)" />
     </UFormField>
 
     <UFormField>
-      <UCheckbox v-model="insurance.coverage.vandalism" label="Vandalismus (+3€)" />
+      <UCheckbox v-model="bikeInsurance.coverage.vandalism" label="Vandalismus (+3€)" />
     </UFormField>
 
     <div class="flex justify-between">
@@ -33,19 +33,14 @@
 definePageMeta({
   middleware: 'insurance-wizard',
 });
-import { useInsuranceStore } from '../../stores/insurance';
+import { useBikeInsuranceStore } from '../../../stores/bikeInsurance.store';
 
-const insurance = useInsuranceStore();
-
-// const coverage = reactive({
-//   theft: false,
-//   vandalism: false,
-// });
+const bikeInsurance = useBikeInsuranceStore();
 
 const prevStep = () => {
-  navigateTo('/insurance/bike');
+  navigateTo('/insurance/bike/start');
 };
 const nextStep = () => {
-  navigateTo('/insurance/personal');
+  navigateTo('/insurance/bike/personal');
 };
 </script>

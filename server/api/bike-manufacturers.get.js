@@ -1,4 +1,4 @@
-import manufacturers from '../data/manufacturers.json';
+import manufacturers from '../data/bike/manufacturers.json';
 
 export default defineEventHandler(() => {
   return manufacturers;

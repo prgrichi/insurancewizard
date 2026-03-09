@@ -2,14 +2,21 @@
   <div class="space-y-2xl">
     <!-- Hero -->
     <section class="text-center space-y-lg max-w-app mx-auto">
-      <h1 class="text-3xl font-bold text-text-main">Fahrradversicherung einfach berechnen</h1>
+      <h1 class="text-3xl font-bold text-text-main">Versicherungen einfach berechnen</h1>
 
       <p class="text-text-main">
-        Gib dein Fahrrad ein, wähle den passenden Schutz und sieh sofort deinen
-        Versicherungsbeitrag.
+        Wähle deine gewünschte Versicherung, den passenden Schutz und du bekommst direkt deinen
+        Beitrag.
       </p>
 
-      <UButton size="lg" color="primary" @click="start"> Versicherung berechnen </UButton>
+      <div class="inline-flex flex-col gap-md">
+        <UButton size="lg" color="primary" class="justify-center" @click="startBike">
+          Fahrradversicherung berechnen
+        </UButton>
+        <UButton size="lg" color="primary" class="justify-center" @click="startCar">
+          Autoversicherung berechnen
+        </UButton>
+      </div>
     </section>
 
     <!-- Vorteile -->
@@ -33,7 +40,10 @@
 </template>
 
 <script setup>
-const start = () => {
-  navigateTo('/insurance/bike');
+const startBike = () => {
+  navigateTo('/insurance/bike/start');
+};
+const startCar = () => {
+  navigateTo('/insurance/car/start');
 };
 </script>
