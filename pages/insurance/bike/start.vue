@@ -44,15 +44,15 @@
 import { useBikeInsuranceStore } from '../../../stores/bikeInsurance.store';
 import { useLookupStore } from '~/stores/lookup.store';
 
-const lookUp = useLookupStore();
+const lookUpStore = useLookupStore();
 const bikeInsurance = useBikeInsuranceStore();
 
 onMounted(() => {
-  lookUp.fetchManufacturers('bike');
+  lookUpStore.fetchManufacturers('bike');
 });
 
 const manufacturerItems = computed(() =>
-  lookUp.manufacturers.map(m => ({
+  lookUpStore.manufacturers.bike.map(m => ({
     label: m.name,
     value: m.id,
   }))
@@ -62,18 +62,15 @@ watch(
   () => bikeInsurance.bike.manufacturerId,
   id => {
     if (!id) return;
-    lookUp.fetchModels('bike', id);
-    console.log(lookUp.models);
+    lookUpStore.fetchModels('bike', id);
   }
 );
 
 const modelItems = computed(() =>
-  lookUp.models
-    .filter(m => m.manufacturerId === bikeInsurance.bike.manufacturerId)
-    .map(m => ({
-      label: m.name,
-      value: m.id,
-    }))
+  lookUpStore.models.bike.map(m => ({
+    label: m.name,
+    value: m.id,
+  }))
 );
 
 watch(
@@ -90,7 +87,6 @@ const isStepValid = computed(() => {
 });
 
 const nextStep = () => {
-  console.log(bikeInsurance.bike);
   navigateTo('/insurance/bike/coverage');
 };
 </script>

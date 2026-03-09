@@ -47,9 +47,9 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: 'insurance-wizard',
-});
+// definePageMeta({
+//   middleware: 'insurance-wizard',
+// });
 
 import { useBikeInsuranceStore } from '../../../stores/bikeInsurance.store';
 

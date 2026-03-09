@@ -42,9 +42,9 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: 'insurance-wizard',
-});
+// definePageMeta({
+//   middleware: 'insurance-wizard',
+// });
 
 import { z } from 'zod';
 import { useForm } from 'vee-validate';
