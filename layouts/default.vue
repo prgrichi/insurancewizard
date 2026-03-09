@@ -3,8 +3,10 @@
     <TheHeader />
 
     <main id="main-content" tabindex="-1" class="flex-1 pt-2xl">
-      <div class="container page">
-        <slot></slot>
+      <div class="container page px-md max-w-app">
+        <div class="mx-auto max-w-content">
+          <slot></slot>
+        </div>
       </div>
     </main>
 
