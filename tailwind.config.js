@@ -36,6 +36,7 @@ export default {
 
       maxWidth: {
         app: '1200px',
+        content: '800px',
       },
     },
   },
