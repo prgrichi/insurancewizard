@@ -9,5 +9,5 @@ export function getModels(type, manufacturerId) {
 }
 
 export function getSfClasses() {
-  return $fetch('/api/sf-classes');
+  return $fetch('/api/car/sf-classes');
 }
