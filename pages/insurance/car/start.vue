@@ -32,15 +32,26 @@
       />
     </UFormField>
 
-    <UButton
-      size="lg"
-      :disabled="!isStepValid"
-      color="primary"
-      @click="nextStep"
-      class="w-full flex justify-center"
-    >
-      Weiter
-    </UButton>
+    <div class="flex justify-between">
+      <UButton
+        size="lg"
+        color="primary"
+        variant="ghost"
+        @click="prevStep"
+        class="flex justify-center"
+      >
+        Zurück
+      </UButton>
+      <UButton
+        size="lg"
+        color="primary"
+        :disabled="!isStepValid"
+        @click="nextStep"
+        class="flex justify-center"
+      >
+        Weiter
+      </UButton>
+    </div>
   </div>
 </template>
 
@@ -64,8 +75,8 @@ const currentYear = new Date().getFullYear();
 const schema = z.object({
   constructionYear: z.coerce
     .number()
-    .min(1960, 'Baujahr zu alt')
-    .max(currentYear, 'Baujahr liegt in der Zukunft'),
+    .min(1960, 'Das Baujahr ist zu alt.')
+    .max(currentYear, 'Das Baujahr liegt in der Zukunft.'),
 });
 
 const { defineField, errors } = useForm({
@@ -125,6 +136,9 @@ const isStepValid = computed(() => {
   );
 });
 
+const prevStep = () => {
+  navigateTo('/');
+};
 const nextStep = () => {
   navigateTo('/insurance/car/driver');
 };
