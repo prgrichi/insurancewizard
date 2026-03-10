@@ -1,0 +1,7 @@
+[
+  { "id": 1, "label": "0 €", "amount": 0 },
+  { "id": 2, "label": "150 €", "amount": 150 },
+  { "id": 3, "label": "300 €", "amount": 300 },
+  { "id": 4, "label": "500 €", "amount": 500 },
+  { "id": 5, "label": "1000 €", "amount": 1000 }
+]

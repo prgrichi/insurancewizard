@@ -1,0 +1,7 @@
+[
+  { "id": 1, "label": "Straßenrand / öffentlicher Parkplatz" },
+  { "id": 2, "label": "Privater Stellplatz" },
+  { "id": 3, "label": "Carport" },
+  { "id": 4, "label": "Garage" },
+  { "id": 5, "label": "Tiefgarage" }
+]

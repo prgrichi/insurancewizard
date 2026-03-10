@@ -1,0 +1,9 @@
+[
+  { "id": 1, "label": "bis 5.000 km", "max": 5000 },
+  { "id": 2, "label": "bis 9.000 km", "max": 9000 },
+  { "id": 3, "label": "bis 12.000 km", "max": 12000 },
+  { "id": 4, "label": "bis 15.000 km", "max": 15000 },
+  { "id": 5, "label": "bis 20.000 km", "max": 20000 },
+  { "id": 6, "label": "bis 25.000 km", "max": 25000 },
+  { "id": 7, "label": "über 25.000 km", "max": 999999 }
+]
