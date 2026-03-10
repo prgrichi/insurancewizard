@@ -52,7 +52,7 @@ onMounted(() => {
 });
 
 const manufacturerItems = computed(() =>
-  lookUpStore.manufacturers.bike.map(m => ({
+  lookUpStore.manufacturers.bike.data.map(m => ({
     label: m.name,
     value: m.id,
   }))
@@ -67,7 +67,7 @@ watch(
 );
 
 const modelItems = computed(() =>
-  lookUpStore.models.bike.map(m => ({
+  lookUpStore.models.bike.data.map(m => ({
     label: m.name,
     value: m.id,
   }))

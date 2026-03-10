@@ -1,59 +1,73 @@
 import { defineStore } from 'pinia';
-import { getManufacturers, getModels, getSfClasses } from '~/services/lookup.service';
+import {
+  getManufacturers,
+  getModels,
+  getSfClasses,
+  getAnnualMileAge,
+} from '~/services/lookup.service';
+
+function createLookup() {
+  return reactive({
+    data: [],
+    loading: false,
+  });
+}
 
 export const useLookupStore = defineStore('lookup', () => {
-  const manufacturers = reactive({
-    bike: [],
-    car: [],
-  });
+  const manufacturers = {
+    bike: createLookup(),
+    car: createLookup(),
+  };
 
-  const models = reactive({
-    bike: [],
-    car: [],
-  });
+  const models = {
+    bike: createLookup(),
+    car: createLookup(),
+  };
 
-  const sfClasses = reactive({
-    car: [],
-  });
-  const loadingSfClasses = ref(false);
+  const sfClasses = {
+    car: createLookup(),
+  };
 
-  const loadingManufacturers = reactive({
-    bike: false,
-    car: false,
-  });
-
-  const loadingModels = reactive({
-    bike: false,
-    car: false,
-  });
+  const annualMileage = {
+    car: createLookup(),
+  };
 
   async function fetchManufacturers(type) {
-    loadingManufacturers[type] = true;
-    manufacturers[type] = await getManufacturers(type);
-    loadingManufacturers[type] = false;
+    const target = manufacturers[type];
+    target.loading = true;
+    target.data = await getManufacturers(type);
+    target.loading = false;
   }
 
   async function fetchModels(type, manufacturerId) {
-    loadingModels[type] = true;
-    models[type] = await getModels(type, manufacturerId);
-    loadingModels[type] = false;
+    const target = models[type];
+    target.loading = true;
+    target.data = await getModels(type, manufacturerId);
+    target.loading = false;
   }
 
   async function fetchSfClasses() {
-    loadingSfClasses.value = true;
-    sfClasses.car = await getSfClasses();
-    loadingSfClasses.value = false;
+    const target = sfClasses.car;
+    target.loading = true;
+    target.data = await getSfClasses();
+    target.loading = false;
+  }
+
+  async function fetchAnnualMileage() {
+    const target = annualMileage.car;
+    target.loading = true;
+    target.data = await getAnnualMileAge();
+    target.loading = false;
   }
 
   return {
     manufacturers,
     models,
     sfClasses,
-    loadingManufacturers,
-    loadingModels,
-    loadingSfClasses,
+    annualMileage,
     fetchManufacturers,
     fetchModels,
     fetchSfClasses,
+    fetchAnnualMileage,
   };
 });

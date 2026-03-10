@@ -6,7 +6,7 @@
       <USelect
         v-model="carInsuranceStore.driver.sfClassId"
         :items="sfClassesItems"
-        :loading="lookUpStore.loadingSfClasses"
+        :loading="lookUpStore.sfClasses.car.loading"
         placeholder="SF Klasse auswählen"
         class="w-full"
       />
@@ -87,7 +87,7 @@ onMounted(async () => {
 });
 
 const sfClassesItems = computed(() =>
-  lookUpStore.sfClasses.car.map(m => ({
+  lookUpStore.sfClasses.car.data.map(m => ({
     label: m.label,
     value: m.id,
   }))

@@ -13,7 +13,7 @@
       <USelect
         v-model="carInsuranceStore.vehicle.modelId"
         :items="modelItems"
-        :loading="lookUpStore.loadingModels.car"
+        :loading="lookUpStore.models.car.loading"
         :placeholder="
           carInsuranceStore.vehicle.manufacturerId ? 'Modell auswählen' : 'Zuerst Hersteller wählen'
         "
@@ -106,14 +106,14 @@ onMounted(async () => {
 });
 
 const manufacturerItems = computed(() =>
-  lookUpStore.manufacturers.car.map(m => ({
+  lookUpStore.manufacturers.car.data.map(m => ({
     label: m.name,
     value: m.id,
   }))
 );
 
 const modelItems = computed(() =>
-  lookUpStore.models.car.map(m => ({
+  lookUpStore.models.car.data.map(m => ({
     label: m.name,
     value: m.id,
   }))
