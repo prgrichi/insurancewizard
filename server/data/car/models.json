@@ -1,32 +1,32 @@
 [
-  { "id": 100, "name": "Golf", "manufacturerId": 1 },
-  { "id": 101, "name": "Passat", "manufacturerId": 1 },
-  { "id": 102, "name": "Tiguan", "manufacturerId": 1 },
-  { "id": 103, "name": "Polo", "manufacturerId": 1 },
+  { "id": 100, "label": "Golf", "manufacturerId": 1 },
+  { "id": 101, "label": "Passat", "manufacturerId": 1 },
+  { "id": 102, "label": "Tiguan", "manufacturerId": 1 },
+  { "id": 103, "label": "Polo", "manufacturerId": 1 },
 
-  { "id": 200, "name": "3er", "manufacturerId": 2 },
-  { "id": 201, "name": "5er", "manufacturerId": 2 },
-  { "id": 202, "name": "X3", "manufacturerId": 2 },
-  { "id": 203, "name": "X5", "manufacturerId": 2 },
+  { "id": 200, "label": "3er", "manufacturerId": 2 },
+  { "id": 201, "label": "5er", "manufacturerId": 2 },
+  { "id": 202, "label": "X3", "manufacturerId": 2 },
+  { "id": 203, "label": "X5", "manufacturerId": 2 },
 
-  { "id": 300, "name": "A3", "manufacturerId": 3 },
-  { "id": 301, "name": "A4", "manufacturerId": 3 },
-  { "id": 302, "name": "Q3", "manufacturerId": 3 },
-  { "id": 303, "name": "Q5", "manufacturerId": 3 },
+  { "id": 300, "label": "A3", "manufacturerId": 3 },
+  { "id": 301, "label": "A4", "manufacturerId": 3 },
+  { "id": 302, "label": "Q3", "manufacturerId": 3 },
+  { "id": 303, "label": "Q5", "manufacturerId": 3 },
 
-  { "id": 400, "name": "C-Klasse", "manufacturerId": 4 },
-  { "id": 401, "name": "E-Klasse", "manufacturerId": 4 },
-  { "id": 402, "name": "GLC", "manufacturerId": 4 },
+  { "id": 400, "label": "C-Klasse", "manufacturerId": 4 },
+  { "id": 401, "label": "E-Klasse", "manufacturerId": 4 },
+  { "id": 402, "label": "GLC", "manufacturerId": 4 },
 
-  { "id": 500, "name": "Focus", "manufacturerId": 5 },
-  { "id": 501, "name": "Fiesta", "manufacturerId": 5 },
-  { "id": 502, "name": "Kuga", "manufacturerId": 5 },
+  { "id": 500, "label": "Focus", "manufacturerId": 5 },
+  { "id": 501, "label": "Fiesta", "manufacturerId": 5 },
+  { "id": 502, "label": "Kuga", "manufacturerId": 5 },
 
-  { "id": 600, "name": "Astra", "manufacturerId": 6 },
-  { "id": 601, "name": "Corsa", "manufacturerId": 6 },
-  { "id": 602, "name": "Insignia", "manufacturerId": 6 },
+  { "id": 600, "label": "Astra", "manufacturerId": 6 },
+  { "id": 601, "label": "Corsa", "manufacturerId": 6 },
+  { "id": 602, "label": "Insignia", "manufacturerId": 6 },
 
-  { "id": 700, "name": "Corolla", "manufacturerId": 7 },
-  { "id": 701, "name": "Yaris", "manufacturerId": 7 },
-  { "id": 702, "name": "RAV4", "manufacturerId": 7 }
+  { "id": 700, "label": "Corolla", "manufacturerId": 7 },
+  { "id": 701, "label": "Yaris", "manufacturerId": 7 },
+  { "id": 702, "label": "RAV4", "manufacturerId": 7 }
 ]

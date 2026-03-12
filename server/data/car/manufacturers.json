@@ -1,9 +1,9 @@
 [
-  { "id": 1, "name": "Volkswagen" },
-  { "id": 2, "name": "BMW" },
-  { "id": 3, "name": "Audi" },
-  { "id": 4, "name": "Mercedes-Benz" },
-  { "id": 5, "name": "Ford" },
-  { "id": 6, "name": "Opel" },
-  { "id": 7, "name": "Toyota" }
+  { "id": 1, "label": "Volkswagen" },
+  { "id": 2, "label": "BMW" },
+  { "id": 3, "label": "Audi" },
+  { "id": 4, "label": "Mercedes-Benz" },
+  { "id": 5, "label": "Ford" },
+  { "id": 6, "label": "Opel" },
+  { "id": 7, "label": "Toyota" }
 ]
