@@ -8,18 +8,18 @@
         </NuxtLink>
       </div>
 
-      <div class="text-sm text-text-main w-1/3 flex justify-center" v-if="isInsuranceWizard">
-        Schritt {{ currentStep }} von {{ totalSteps }}
-      </div>
-
       <div class="w-1/3">
-        <UProgress
-          v-if="currentStep"
-          v-model="progress"
-          color="primary"
-          size="sm"
-          animation="none"
-        />
+        <div class="flex items-center gap-sm">
+          <div v-if="isInsuranceWizard" class="shrink-0">{{ currentStep }} / {{ totalSteps }}</div>
+          <UProgress
+            v-if="currentStep"
+            v-model="progress"
+            class="flex-1"
+            color="primary"
+            size="sm"
+            animation="none"
+          />
+        </div>
       </div>
     </div>
   </header>

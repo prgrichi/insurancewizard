@@ -1,41 +1,37 @@
 <template>
   <div class="space-y-6 max-w-app">
-    <h1 class="text-3xl font-bold text-text-main">Versicherungsoptionen</h1>
+    <h1 class="text-3xl font-bold text-text-main">Angaben zum Fahrer</h1>
 
-    <UFormField label="Schadenfreiheitsklasse" class="w-full">
-      <USelect
-        v-model="carInsuranceStore.driver.sfClassId"
-        :items="sfClassesItems"
-        :loading="lookUpStore.sfClasses.car.loading"
-        placeholder="SF Klasse auswählen"
-        class="w-full"
-      />
-    </UFormField>
+    <form @submit.prevent="onSubmit" novalidate class="space-y-6">
+      <UFormField label="Schadenfreiheitsklasse" class="w-full">
+        <USelect
+          v-model="carInsuranceStore.driver.sfClassId"
+          :items="sfClassesItems"
+          :loading="lookUpStore.sfClasses.car.loading"
+          placeholder="SF Klasse auswählen"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Alter" :error="errors.age">
-      <UInput v-model="age" v-bind="ageAttrs" class="w-full" type="number" />
-    </UFormField>
+      <UFormField label="Alter" :error="errors.age">
+        <UInput v-model="age" v-bind="ageAttrs" class="w-full" type="number" />
+      </UFormField>
 
-    <div class="flex justify-between">
-      <UButton
-        size="lg"
-        color="primary"
-        variant="ghost"
-        @click="prevStep"
-        class="flex justify-center"
-      >
-        Zurück
-      </UButton>
-      <UButton
-        size="lg"
-        color="primary"
-        :disabled="!isStepValid"
-        @click="nextStep"
-        class="flex justify-center"
-      >
-        Weiter
-      </UButton>
-    </div>
+      <div class="flex justify-between">
+        <UButton
+          size="lg"
+          color="primary"
+          variant="ghost"
+          @click="prevStep"
+          class="flex justify-center"
+        >
+          Zurück
+        </UButton>
+        <UButton size="lg" color="primary" type="submit" class="flex justify-center">
+          Weiter
+        </UButton>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -68,7 +64,7 @@ const schema = z.object({
   ),
 });
 
-const { defineField, errors } = useForm({
+const { handleSubmit, defineField, errors } = useForm({
   validationSchema: toTypedSchema(schema),
   initialValues: {
     age: carInsuranceStore.driver.age,
@@ -93,14 +89,12 @@ const sfClassesItems = computed(() =>
   }))
 );
 
-const isStepValid = computed(() => {
-  return age.value;
-});
-
 const prevStep = () => {
   navigateTo('/insurance/car/start');
 };
-const nextStep = () => {
+
+const onSubmit = handleSubmit(values => {
+  carInsuranceStore.driver.age = values.age;
   navigateTo('/insurance/car/usage');
-};
+});
 </script>

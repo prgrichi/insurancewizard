@@ -64,7 +64,7 @@ definePageMeta({
 import { z } from 'zod';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
-import { useCarInsuranceStore } from '../../../stores/carInsurance.store';
+import { useCarInsuranceStore } from '~/stores/carInsurance.store';
 import { useLookupStore } from '~/stores/lookup.store';
 
 const lookUpStore = useLookupStore();
@@ -107,14 +107,14 @@ onMounted(async () => {
 
 const manufacturerItems = computed(() =>
   lookUpStore.manufacturers.car.data.map(m => ({
-    label: m.name,
+    label: m.label,
     value: m.id,
   }))
 );
 
 const modelItems = computed(() =>
   lookUpStore.models.car.data.map(m => ({
-    label: m.name,
+    label: m.label,
     value: m.id,
   }))
 );

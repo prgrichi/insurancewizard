@@ -4,6 +4,8 @@ import {
   getModels,
   getSfClasses,
   getAnnualMileAge,
+  getParkingType,
+  getDeductibles,
 } from '~/services/lookup.service';
 
 function createLookup() {
@@ -29,6 +31,14 @@ export const useLookupStore = defineStore('lookup', () => {
   };
 
   const annualMileage = {
+    car: createLookup(),
+  };
+
+  const parkingType = {
+    car: createLookup(),
+  };
+
+  const deductibles = {
     car: createLookup(),
   };
 
@@ -60,14 +70,32 @@ export const useLookupStore = defineStore('lookup', () => {
     target.loading = false;
   }
 
+  async function fetchparkingType() {
+    const target = parkingType.car;
+    target.loading = true;
+    target.data = await getParkingType();
+    target.loading = false;
+  }
+
+  async function fetchDeductibles() {
+    const target = deductibles.car;
+    target.loading = true;
+    target.data = await getDeductibles();
+    target.loading = false;
+  }
+
   return {
     manufacturers,
     models,
     sfClasses,
     annualMileage,
+    parkingType,
+    deductibles,
     fetchManufacturers,
     fetchModels,
     fetchSfClasses,
     fetchAnnualMileage,
+    fetchparkingType,
+    fetchDeductibles,
   };
 });

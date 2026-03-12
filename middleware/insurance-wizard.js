@@ -11,8 +11,6 @@ export default defineNuxtRouteMiddleware(to => {
     !!bikeInsurance.personal.lastName &&
     !!bikeInsurance.personal.email;
 
-  console.log(bikeComplete);
-  console.log(personalComplete);
   if (!bikeComplete && to.path !== '/insurance/bike') {
     return navigateTo('/insurance/bike');
   }

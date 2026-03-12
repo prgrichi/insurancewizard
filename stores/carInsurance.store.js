@@ -39,7 +39,7 @@ export const useCarInsuranceStore = defineStore('carInsurance', () => {
 
   // Pricing (demo calculation)
   const premium = computed(() =>
-    calculateCarPremium({ vehicle, driver, usage, coverage }, lookupStore.sfClasses.car)
+    calculateCarPremium({ vehicle, driver, usage, coverage }, lookupStore.sfClasses.car.data)
   );
 
   function reset() {

@@ -5,8 +5,8 @@
     <UFormField label="Jährliche Kilometerleistung" class="w-full">
       <USelect
         v-model="carInsuranceStore.usage.annualMileageId"
-        :items="annualMileItems"
-        :loading="lookUpStore.loadingSfClasses"
+        :items="annualMileageItems"
+        :loading="lookupStore.annualMileage.car.loading"
         placeholder="z.B. 10.000"
         class="w-full"
       />
@@ -16,7 +16,7 @@
       <USelect
         v-model="carInsuranceStore.usage.parkingTypeId"
         :items="parkingTypeItems"
-        :loading="lookUpStore.loadingSfClasses"
+        :loading="lookupStore.parkingType.car.loading"
         placeholder="Garage"
         class="w-full"
       />
@@ -49,6 +49,35 @@
 definePageMeta({
   step: 3,
   totalSteps: 7,
+});
+
+import { useCarInsuranceStore } from '~/stores/carInsurance.store';
+import { useLookupStore } from '~/stores/lookup.store';
+
+const carInsuranceStore = useCarInsuranceStore();
+const lookupStore = useLookupStore();
+
+onMounted(async () => {
+  await lookupStore.fetchAnnualMileage();
+  await lookupStore.fetchparkingType();
+});
+
+const annualMileageItems = computed(() =>
+  lookupStore.annualMileage.car.data.map(m => ({
+    label: m.label,
+    value: m.id,
+  }))
+);
+
+const parkingTypeItems = computed(() =>
+  lookupStore.parkingType.car.data.map(m => ({
+    label: m.label,
+    value: m.id,
+  }))
+);
+
+const isStepValid = computed(() => {
+  return carInsuranceStore.usage.annualMileageId && carInsuranceStore.usage.parkingTypeId;
 });
 
 const prevStep = () => {
