@@ -32,6 +32,9 @@
           class="w-full md:w-auto"
           :loading="lookupStore.deductibles.car.loading"
         />
+        <div class="mt-2 text-error text-sm" v-if="lookupStore.deductibles.car.error">
+          Daten konnten nicht geladen werden
+        </div>
       </UFormField>
 
       <div class="flex justify-between">

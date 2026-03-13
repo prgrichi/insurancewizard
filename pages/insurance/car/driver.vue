@@ -7,10 +7,13 @@
         <USelect
           v-model="sfClassId"
           :items="sfClassesItems"
-          :loading="lookUpStore.sfClasses.car.loading"
+          :loading="lookupStore.sfClasses.car.loading"
           placeholder="SF Klasse auswählen"
           class="w-full"
         />
+        <div class="mt-2 text-error text-sm" v-if="lookupStore.sfClasses.car.error">
+          Daten konnten nicht geladen werden
+        </div>
       </UFormField>
 
       <UFormField label="Alter" :error="errors.age">
@@ -48,7 +51,7 @@ import { useCarInsuranceStore } from '~/stores/carInsurance.store';
 import { useLookupStore } from '~/stores/lookUp.store';
 
 const carInsuranceStore = useCarInsuranceStore();
-const lookUpStore = useLookupStore();
+const lookupStore = useLookupStore();
 
 const schema = z.object({
   sfClassId: z.coerce.number().min(1, 'Bitte eine SF-Klasse auswählen'),
@@ -82,11 +85,12 @@ const [age, ageAttrs] = defineField('age', {
 });
 
 onMounted(async () => {
-  await lookUpStore.fetchSfClasses();
+  // await lookUpStore.fetchSfClasses();
+  await fetchLookup(sfClasses.car, getSfClasses);
 });
 
 const sfClassesItems = computed(() =>
-  lookUpStore.sfClasses.car.data.map(m => ({
+  lookupStore.sfClasses.car.data.map(m => ({
     label: m.label,
     value: m.id,
   }))

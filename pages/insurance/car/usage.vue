@@ -15,6 +15,9 @@
           placeholder="z.B. 10.000"
           class="w-full"
         />
+        <div class="mt-2 text-error text-sm" v-if="lookupStore.annualMileage.car.error">
+          Daten konnten nicht geladen werden
+        </div>
       </UFormField>
 
       <UFormField
@@ -29,6 +32,9 @@
           placeholder="Garage"
           class="w-full"
         />
+        <div class="mt-2 text-error text-sm" v-if="lookupStore.parkingType.car.error">
+          Daten konnten nicht geladen werden
+        </div>
       </UFormField>
 
       <div class="flex justify-between">

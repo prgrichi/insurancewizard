@@ -8,17 +8,23 @@
           placeholder="Hersteller auswählen"
           class="w-full"
         />
+        <div class="mt-2 text-error text-sm" v-if="lookupStore.manufacturers.car.error">
+          Daten konnten nicht geladen werden
+        </div>
       </UFormField>
 
       <UFormField label="Modell" :error="errors.modelId" class="w-full">
         <USelect
           v-model="modelId"
           :items="modelItems"
-          :loading="lookUpStore.models.car.loading"
+          :loading="lookupStore.models.car.loading"
           :placeholder="manufacturerId ? 'Modell auswählen' : 'Zuerst Hersteller wählen'"
           :disabled="!manufacturerId || modelItems.length === 0"
           class="w-full"
         />
+        <div class="mt-2 text-error text-sm" v-if="lookupStore.models.car.error">
+          Daten konnten nicht geladen werden
+        </div>
       </UFormField>
 
       <UFormField label="Baujahr" :error="errors.constructionYear">
@@ -61,7 +67,7 @@ import { toTypedSchema } from '@vee-validate/zod';
 import { useCarInsuranceStore } from '~/stores/carInsurance.store';
 import { useLookupStore } from '~/stores/lookup.store';
 
-const lookUpStore = useLookupStore();
+const lookupStore = useLookupStore();
 const carInsuranceStore = useCarInsuranceStore();
 
 const currentYear = new Date().getFullYear();
@@ -75,7 +81,7 @@ const schema = z.object({
     .max(currentYear, 'Das Baujahr liegt in der Zukunft.'),
 });
 
-const { handleSubmit, defineField, errors } = useForm({
+const { handleSubmit, defineField, errors, resetField } = useForm({
   validationSchema: toTypedSchema(schema),
   initialValues: {
     manufacturerId: carInsuranceStore.vehicle.manufacturerId ?? null,
@@ -94,22 +100,22 @@ const [constructionYear, constructionYearAttrs] = defineField('constructionYear'
 });
 
 onMounted(async () => {
-  await lookUpStore.fetchManufacturers('car');
+  await lookupStore.fetchManufacturers('car');
 
   if (carInsuranceStore.vehicle.manufacturerId) {
-    await lookUpStore.fetchModels('car', carInsuranceStore.vehicle.manufacturerId);
+    await lookupStore.fetchModels('car', carInsuranceStore.vehicle.manufacturerId);
   }
 });
 
 const manufacturerItems = computed(() =>
-  lookUpStore.manufacturers.car.data.map(m => ({
+  lookupStore.manufacturers.car.data.map(m => ({
     label: m.label,
     value: m.id,
   }))
 );
 
 const modelItems = computed(() =>
-  lookUpStore.models.car.data.map(m => ({
+  lookupStore.models.car.data.map(m => ({
     label: m.label,
     value: m.id,
   }))
@@ -118,9 +124,9 @@ const modelItems = computed(() =>
 watch(
   () => manufacturerId.value,
   async id => {
-    modelId.value = null;
+    resetField('modelId', { value: null });
     if (!id) return;
-    await lookUpStore.fetchModels('car', id);
+    await lookupStore.fetchModels('car', id);
   }
 );
 

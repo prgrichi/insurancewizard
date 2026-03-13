@@ -12,6 +12,7 @@ function createLookup() {
   return reactive({
     data: [],
     loading: false,
+    error: null,
   });
 }
 
@@ -44,44 +45,104 @@ export const useLookupStore = defineStore('lookup', () => {
 
   async function fetchManufacturers(type) {
     const target = manufacturers[type];
-    target.loading = true;
-    target.data = await getManufacturers(type);
-    target.loading = false;
+
+    try {
+      target.loading = true;
+      target.error = null;
+
+      target.data = await getManufacturers(type);
+    } catch (error) {
+      target.error = error;
+      console.error(error);
+      target.data = [];
+    } finally {
+      target.loading = false;
+    }
   }
 
   async function fetchModels(type, manufacturerId) {
     const target = models[type];
-    target.loading = true;
-    target.data = await getModels(type, manufacturerId);
-    target.loading = false;
+
+    try {
+      target.loading = true;
+      target.error = null;
+
+      target.data = await getModels(type, manufacturerId);
+    } catch (error) {
+      target.error = error;
+      console.error(error);
+      target.data = [];
+    } finally {
+      target.loading = false;
+    }
   }
 
   async function fetchSfClasses() {
     const target = sfClasses.car;
-    target.loading = true;
-    target.data = await getSfClasses();
-    target.loading = false;
+
+    try {
+      target.loading = true;
+      target.error = null;
+
+      target.data = await getSfClasses();
+    } catch (error) {
+      target.error = error;
+      console.error(error);
+      target.data = [];
+    } finally {
+      target.loading = false;
+    }
   }
 
   async function fetchAnnualMileage() {
     const target = annualMileage.car;
-    target.loading = true;
-    target.data = await getAnnualMileAge();
-    target.loading = false;
+
+    try {
+      target.loading = true;
+      target.error = null;
+
+      target.data = await getAnnualMileAge();
+    } catch (error) {
+      target.error = error;
+      console.error(error);
+      target.data = [];
+    } finally {
+      target.loading = false;
+    }
   }
 
   async function fetchParkingType() {
     const target = parkingType.car;
-    target.loading = true;
-    target.data = await getParkingType();
-    target.loading = false;
+
+    try {
+      target.loading = true;
+      target.error = null;
+
+      target.data = await getParkingType();
+    } catch (error) {
+      target.error = error;
+      console.error(error);
+      target.data = [];
+    } finally {
+      target.loading = false;
+    }
   }
 
   async function fetchDeductibles() {
     const target = deductibles.car;
-    target.loading = true;
-    target.data = await getDeductibles();
-    target.loading = false;
+
+    try {
+      target.loading = true;
+      target.error = null;
+
+      target.data = await getDeductibles();
+    } catch (error) {
+      target.error = error;
+      console.error(error);
+      target.data = [];
+    } finally {
+      target.loading = false;
+    }
   }
 
   return {
