@@ -1,5 +1,6 @@
 export function calculateCarPremium(data, sfClasses) {
   let base = 500;
+  console.log(data);
 
   if (data.coverage.type === 'partial') base += 120;
   if (data.coverage.type === 'full') base += 250;

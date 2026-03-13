@@ -1,57 +1,51 @@
 <template>
-  <div class="space-y-6 max-w-app">
-    <UFormField label="Hersteller" class="w-full">
-      <USelect
-        v-model="carInsuranceStore.vehicle.manufacturerId"
-        :items="manufacturerItems"
-        placeholder="Hersteller auswählen"
-        class="w-full"
-      />
-    </UFormField>
+  <div class="max-w-app">
+    <form @submit.prevent="onSubmit" class="space-y-6">
+      <UFormField label="Hersteller" :error="errors.manufacturerId" class="w-full">
+        <USelect
+          v-model="manufacturerId"
+          :items="manufacturerItems"
+          placeholder="Hersteller auswählen"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Modell" class="w-full">
-      <USelect
-        v-model="carInsuranceStore.vehicle.modelId"
-        :items="modelItems"
-        :loading="lookUpStore.models.car.loading"
-        :placeholder="
-          carInsuranceStore.vehicle.manufacturerId ? 'Modell auswählen' : 'Zuerst Hersteller wählen'
-        "
-        :disabled="!carInsuranceStore.vehicle.manufacturerId || modelItems.length === 0"
-        class="w-full"
-      />
-    </UFormField>
+      <UFormField label="Modell" :error="errors.modelId" class="w-full">
+        <USelect
+          v-model="modelId"
+          :items="modelItems"
+          :loading="lookUpStore.models.car.loading"
+          :placeholder="manufacturerId ? 'Modell auswählen' : 'Zuerst Hersteller wählen'"
+          :disabled="!manufacturerId || modelItems.length === 0"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Baujahr" :error="errors.constructionYear">
-      <UInput
-        v-model="constructionYear"
-        v-bind="constructionYearAttrs"
-        class="w-full"
-        placeholder="z.B. 2018"
-        type="number"
-      />
-    </UFormField>
+      <UFormField label="Baujahr" :error="errors.constructionYear">
+        <UInput
+          v-model="constructionYear"
+          v-bind="constructionYearAttrs"
+          class="w-full"
+          placeholder="z.B. 2018"
+          type="number"
+        />
+      </UFormField>
 
-    <div class="flex justify-between">
-      <UButton
-        size="lg"
-        color="primary"
-        variant="ghost"
-        @click="prevStep"
-        class="flex justify-center"
-      >
-        Zurück
-      </UButton>
-      <UButton
-        size="lg"
-        color="primary"
-        :disabled="!isStepValid"
-        @click="nextStep"
-        class="flex justify-center"
-      >
-        Weiter
-      </UButton>
-    </div>
+      <div class="flex justify-between mt-md">
+        <UButton
+          size="lg"
+          color="primary"
+          variant="ghost"
+          @click="prevStep"
+          class="flex justify-center"
+        >
+          Zurück
+        </UButton>
+        <UButton size="lg" type="submit" color="primary" class="flex justify-center">
+          Weiter
+        </UButton>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -73,15 +67,19 @@ const carInsuranceStore = useCarInsuranceStore();
 const currentYear = new Date().getFullYear();
 
 const schema = z.object({
+  manufacturerId: z.coerce.number().min(1, 'Bitte Hersteller wählen'),
+  modelId: z.coerce.number().min(1, 'Bitte Modell wählen'),
   constructionYear: z.coerce
     .number()
     .min(1960, 'Das Baujahr ist zu alt.')
     .max(currentYear, 'Das Baujahr liegt in der Zukunft.'),
 });
 
-const { defineField, errors } = useForm({
+const { handleSubmit, defineField, errors } = useForm({
   validationSchema: toTypedSchema(schema),
   initialValues: {
+    manufacturerId: carInsuranceStore.vehicle.manufacturerId ?? null,
+    modelId: carInsuranceStore.vehicle.modelId ?? null,
     constructionYear: carInsuranceStore.vehicle.constructionYear,
   },
   validateOnBlur: true,
@@ -89,12 +87,10 @@ const { defineField, errors } = useForm({
   validateOnChange: false,
 });
 
+const [manufacturerId] = defineField('manufacturerId');
+const [modelId] = defineField('modelId');
 const [constructionYear, constructionYearAttrs] = defineField('constructionYear', {
   validateOnModelUpdate: false,
-});
-
-watch(constructionYear, value => {
-  carInsuranceStore.vehicle.constructionYear = value;
 });
 
 onMounted(async () => {
@@ -120,26 +116,20 @@ const modelItems = computed(() =>
 );
 
 watch(
-  () => carInsuranceStore.vehicle.manufacturerId,
+  () => manufacturerId.value,
   async id => {
-    carInsuranceStore.vehicle.modelId = null;
+    modelId.value = null;
     if (!id) return;
     await lookUpStore.fetchModels('car', id);
   }
 );
 
-const isStepValid = computed(() => {
-  return (
-    carInsuranceStore.vehicle.manufacturerId &&
-    carInsuranceStore.vehicle.modelId &&
-    constructionYear.value
-  );
-});
-
 const prevStep = () => {
   navigateTo('/');
 };
-const nextStep = () => {
+
+const onSubmit = handleSubmit(values => {
+  Object.assign(carInsuranceStore.vehicle, values);
   navigateTo('/insurance/car/driver');
-};
+});
 </script>

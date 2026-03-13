@@ -2,10 +2,10 @@
   <div class="space-y-6 max-w-app">
     <h1 class="text-3xl font-bold text-text-main">Angaben zum Fahrer</h1>
 
-    <form @submit.prevent="onSubmit" novalidate class="space-y-6">
-      <UFormField label="Schadenfreiheitsklasse" class="w-full">
+    <form @submit.prevent="onSubmit" class="space-y-6">
+      <UFormField label="Schadenfreiheitsklasse" :error="errors.sfClassId" class="w-full">
         <USelect
-          v-model="carInsuranceStore.driver.sfClassId"
+          v-model="sfClassId"
           :items="sfClassesItems"
           :loading="lookUpStore.sfClasses.car.loading"
           placeholder="SF Klasse auswählen"
@@ -51,6 +51,7 @@ const carInsuranceStore = useCarInsuranceStore();
 const lookUpStore = useLookupStore();
 
 const schema = z.object({
+  sfClassId: z.coerce.number().min(1, 'Bitte eine SF-Klasse auswählen'),
   age: z.preprocess(
     v => (v === '' ? undefined : v),
     z.coerce
@@ -67,6 +68,7 @@ const schema = z.object({
 const { handleSubmit, defineField, errors } = useForm({
   validationSchema: toTypedSchema(schema),
   initialValues: {
+    sfClassId: carInsuranceStore.driver.sfClassId,
     age: carInsuranceStore.driver.age,
   },
   validateOnBlur: true,
@@ -74,6 +76,7 @@ const { handleSubmit, defineField, errors } = useForm({
   validateOnChange: false,
 });
 
+const [sfClassId] = defineField('sfClassId');
 const [age, ageAttrs] = defineField('age', {
   validateOnModelUpdate: false,
 });
@@ -94,7 +97,7 @@ const prevStep = () => {
 };
 
 const onSubmit = handleSubmit(values => {
-  carInsuranceStore.driver.age = values.age;
+  Object.assign(carInsuranceStore.driver, values);
   navigateTo('/insurance/car/usage');
 });
 </script>

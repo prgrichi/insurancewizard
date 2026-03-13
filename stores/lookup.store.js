@@ -70,7 +70,7 @@ export const useLookupStore = defineStore('lookup', () => {
     target.loading = false;
   }
 
-  async function fetchparkingType() {
+  async function fetchParkingType() {
     const target = parkingType.car;
     target.loading = true;
     target.data = await getParkingType();
@@ -95,7 +95,7 @@ export const useLookupStore = defineStore('lookup', () => {
     fetchModels,
     fetchSfClasses,
     fetchAnnualMileage,
-    fetchparkingType,
+    fetchParkingType,
     fetchDeductibles,
   };
 });

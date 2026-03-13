@@ -4,13 +4,13 @@
 
     <p class="text-text-main">Ihre Daten werden nur für die Berechnung verwendet.</p>
 
-    <form @submit.prevent="onSubmit" novalidate class="space-y-6">
+    <form @submit.prevent="onSubmit" class="space-y-6">
       <UFormField label="Vorname" :error="errors.firstName">
-        <UInput v-model="firstName" class="w-full" />
+        <UInput v-model="firstName" v-bind="firstNameAttrs" class="w-full" />
       </UFormField>
 
       <UFormField label="Nachname" :error="errors.lastName">
-        <UInput v-model="lastName" class="w-full" />
+        <UInput v-model="lastName" v-bind="lastNameAttrs" class="w-full" />
       </UFormField>
 
       <UFormField label="Email" :error="errors.email">
@@ -53,8 +53,8 @@ import { useCarInsuranceStore } from '~/stores/carInsurance.store';
 const carInsuranceStore = useCarInsuranceStore();
 
 const schema = z.object({
-  firstName: z.string().min(1, 'Vorname ist erforderlich'),
-  lastName: z.string().min(1, 'Nachname ist erforderlich'),
+  firstName: z.string().trim().min(1, 'Vorname ist erforderlich'),
+  lastName: z.string().trim().min(1, 'Nachname ist erforderlich'),
   email: z.string().email('Bitte gültige Email eingeben'),
 });
 
@@ -70,8 +70,8 @@ const { handleSubmit, defineField, errors } = useForm({
   validateOnChange: false,
 });
 
-const [firstName] = defineField('firstName');
-const [lastName] = defineField('lastName');
+const [firstName, firstNameAttrs] = defineField('firstName');
+const [lastName, lastNameAttrs] = defineField('lastName');
 const [email, emailAttrs] = defineField('email', {
   validateOnModelUpdate: false,
 });
@@ -81,9 +81,7 @@ const prevStep = () => {
 };
 
 const onSubmit = handleSubmit(values => {
-  console.log(values);
-  carInsuranceStore.personal = values;
-
+  Object.assign(carInsuranceStore.personal, values);
   navigateTo('/insurance/car/summary');
 });
 </script>

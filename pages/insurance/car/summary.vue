@@ -132,6 +132,11 @@
 </template>
 
 <script setup>
+definePageMeta({
+  step: 6,
+  totalSteps: 7,
+});
+
 import { useCarInsuranceStore } from '~/stores/carInsurance.store';
 import { useLookupStore } from '~/stores/lookup.store';
 
